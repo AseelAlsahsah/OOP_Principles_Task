@@ -1,32 +1,53 @@
-class Visitor{
-	private String email;
-	private Entity entity;
+import java.util.*;
 
-	public String getEmail() { return email; }
-	public void setEmail(String email) { this.email = email; }
+public class Visitor extends User{
 	
-	public Entity getEntity() { return entity; }
-	
-	public Visitor(int id, String name, String email) {
-		entity = new Entity(id, name);
-		this.email = email;
-	}
+	public Visitor(int id, String email, String username, String password) {
+        super(id, email, username, password);
+        this.setRole("Visitor");
+    }
 	
 	public Visitor() {
-		entity = new Entity();
-		this.email = "";
-	}
+        this(-1, "", "", "");
+    }
 	
-	public String viewVisitorInfo() { 
-		return "ID: "+entity.getId()+", Name: "+entity.getName()+", Email: "+email; 
-	}
+    public void viewArtGalleryEvents(List<ArtGalleryEvent> events) {
+        for (ArtGalleryEvent event : events)
+            System.out.println("Name: "+event.getEventName());
+    }
+
+    public void enrollInEvent(int eventId) {
+    	for(ArtGalleryEvent event : ArtGallerySystem.events)
+    		if(event.getId() == eventId)
+    			event.enrollVisitor(this);
+    }
 	
 	public void buyArtwork(Artwork artwork) {
-        if (artwork.isSold()) {
-            System.out.println("Artwork is already sold");
-        } else {
-            artwork.setBuyer(this);
-            System.out.println("You have successfully purchased " + artwork.getEntity().getName());
-        }
+		if (artwork.isSold()) {
+			System.out.println("Artwork is already sold");
+	    } else {
+	        artwork.setBuyer(this);
+	        System.out.println("You have successfully purchased " + artwork.getTitle());
+	    }
+    }
+	
+	public void viewEventArtworks(ArtGalleryEvent event) {
+		System.out.println("\nAll "+event.getEventName()+" artworks:");
+    	if(!event.getEventArtworks().isEmpty()) {
+    		System.out.println("Sculptures: ");
+	    	for(Artwork a : event.getEventArtworks())
+		    	if(a instanceof Sculpture) {
+		    		a.displayInfo();
+		    		System.out.println();
+		    	}
+	   
+	    	System.out.println("\nPaintings: ");
+		    for(Artwork a : event.getEventArtworks()) 
+		    	if(a instanceof Painting) { 
+		    		a.displayInfo();
+		    		System.out.println();
+		    	}
+		    
+    	}else System.out.println("No artworks are added here.");
     }
 }
