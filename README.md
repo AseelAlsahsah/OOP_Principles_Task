@@ -104,10 +104,6 @@ class Artist extends User{
     	// adds an artwork to a specific event
     }
 
-    public void addArtworksToProfile() {
-    	//creates a new artwork and associates it with a specific artist.
-    }
-
     public void addPainting(String name, int yearCreated, double price, String description) {
         //adds the painting to the artist's artworks
     }
@@ -197,10 +193,6 @@ class Organizer extends User {
     public void viewEnrolledUsers(ArtGalleryEvent event) {
         // prints the usernames of all visitors and artists enrolled in a specific event
     }
-
-    public void addArtistArtworks(ArtGalleryEvent event, Artist artist) {
-        // calls the addArtworkToEvent() method to add an artwork to a specific event.
-    }
 }
 ```
 
@@ -232,7 +224,7 @@ public class Admin {
         // views all artists, visitors, and organizers information
     }
 
-    // Getters, setters, and other methods
+    // Getters, setters
 }
 ```
 
@@ -317,7 +309,7 @@ class ArtGalleryEvent {
         // adds a visitor to enrolledVisitors array
     }
     
-	public void enrollArtist(Artist artist) {
+    public void enrollArtist(Artist artist) {
         // adds an artist to enrolledArtists array
     }
 
@@ -331,8 +323,8 @@ class ArtGalleryEvent {
 
 ## Main Class
 
-The `Main` class contains the `main` method where an art gallery event is created by an organizer, then artists, artworks, and visitors are added to the event, and various operations are performed.
+The `Main` class contains the full scenario for each one of the stakeholders (Admin, Organizer, Artist, and Visitor) where various operations are performed by each one of them.
 
 ## Conclusion
 
-In this document, a simple Art Gallery Event Management System that effectively applies OOP principles was shown. These principles provide a structured and organized way to represent and manage complex systems. The code showcases how classes, objects, inheritance, encapsulation, and polymorphism can be used to model and solve problems in an object-oriented manner.
+In this document, a simple Art Gallery Event Management System that effectively applies OOP principles was shown. These principles provide a structured and organized way to represent and manage complex systems. The code showcases how classes, objects, inheritance, encapsulation, abstraction, and polymorphism can be used to model and solve problems in an object-oriented manner.
