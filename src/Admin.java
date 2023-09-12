@@ -19,15 +19,10 @@ public class Admin {
 			if(artist.getId() == id) {
 				artist.setApproved(true);
 				Registration.addUsers(artist);
+				System.out.println("\nArtist "+artist.getUsername()+" approved successfully.");
 			}
 		}
     }
-	
-	public void approveRequest() {
-		approveArtist(3);
-		approveArtist(4);
-		approveArtist(5);
-	}
 	
 	public void viewAllUsers() {
 		System.out.println("\nAll Approved Users: ");

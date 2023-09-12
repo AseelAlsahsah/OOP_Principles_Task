@@ -12,14 +12,17 @@ public class Visitor extends User{
     }
 	
     public void viewArtGalleryEvents(List<ArtGalleryEvent> events) {
-        for (ArtGalleryEvent event : events)
+        System.out.println("\nArt Gallery Events: ");
+    	for (ArtGalleryEvent event : events)
             System.out.println("Name: "+event.getEventName());
     }
 
     public void enrollInEvent(int eventId) {
-    	for(ArtGalleryEvent event : ArtGallerySystem.events)
-    		if(event.getId() == eventId)
+    	for(ArtGalleryEvent event : ArtGallerySystem.getEvents())
+    		if(event.getId() == eventId) {
     			event.enrollVisitor(this);
+    			System.out.println("\nVisitor enrolled in "+event.getEventName()+" successfully");
+    		}
     }
 	
 	public void buyArtwork(Artwork artwork) {

@@ -28,7 +28,7 @@ public class ArtGalleryEvent {
     }
     
     public void viewEventInfo() {
-    	System.out.println("Name: "+eventName+", Date: "+date+", Description: "+description+", Location: "+location);
+    	System.out.println("Name: "+eventName+"\nDate: "+date+"\nDescription: "+description+"\nLocation: "+location);
     }
     
     public void enrollVisitor(Visitor visitor) {

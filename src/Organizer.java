@@ -11,14 +11,15 @@ public class Organizer extends User{
         this(-1, "", "", "");
     }
 	
-	public void createEvent() {
+	public void createEvent(String name, LocalDate date, String description, String location) {
 		int nextEventId = ArtGalleryEvent.getEventsCounter()+1;
-    	ArtGalleryEvent event1 = new ArtGalleryEvent(nextEventId, "Some Event", this, LocalDate.of(2023, 9, 6), "An event description", "Amman, Jordan");
-    	ArtGallerySystem.events.add(event1);
+    	ArtGalleryEvent event1 = new ArtGalleryEvent(nextEventId, name, this, date, description, location);
+    	ArtGallerySystem.addToEvents(event1);
     }
 	
 	public void viewMyEvents() {
-		for(ArtGalleryEvent e : ArtGallerySystem.events) {
+		System.out.println("\nMy Events: ");
+		for(ArtGalleryEvent e : ArtGallerySystem.getEvents()) {
 			if(e.getOrganizer().equals(this))
 				e.viewEventInfo();
 		}
@@ -26,16 +27,17 @@ public class Organizer extends User{
 	
 	public void viewEnrolledUsers(ArtGalleryEvent event) {
 		System.out.println("\nEnrolled visitors in event "+event.getId()+" : ");
-		for(Visitor v: event.getEnrolledVisitors())
-			System.out.println(v.getUsername());
+		if(event.getEnrolledVisitors().isEmpty())
+			System.out.println("No Visitors yet");
+		else
+			for(Visitor v: event.getEnrolledVisitors())
+				System.out.println(v.getUsername());
 		
 		System.out.println("\nEnrolled artists in event 1: ");
-		for(Artist a: event.getEnrolledArtists())
-			System.out.println(a.getUsername());
+		if(event.getEnrolledArtists().isEmpty())
+			System.out.println("No Artists yet");
+		else
+			for(Artist a: event.getEnrolledArtists())
+				System.out.println(a.getUsername());
 	}
-	
-	public void addArtistArtworks(ArtGalleryEvent event, Artist artist) {
-		artist.addArtworkToEvent(event.getId(), artist.getArtistArtworks().get(0));
-		artist.addArtworkToEvent(event.getId(), artist.getArtistArtworks().get(1));
-    }
 }

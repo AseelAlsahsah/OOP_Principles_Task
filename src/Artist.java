@@ -19,22 +19,15 @@ public class Artist extends User{
     
     @Override
 	public void viewUserInfo() {
-		System.out.println("ID: "+getId()+", Email: "+getEmail()+", username: "+getUsername()+", art style: "+artStyle);		
+		System.out.println("Email: "+getEmail()+", username: "+getUsername()+", art style: "+artStyle);		
 	}
  
     public boolean isApproved() { return approved; }
 
     public void addArtworkToEvent(int eventId, Artwork artwork) {
-    	for(ArtGalleryEvent e : ArtGallerySystem.events)
+    	for(ArtGalleryEvent e : ArtGallerySystem.getEvents())
     		if(e.getId() == eventId)
     			e.addArtwork(artwork);
-    }
-    
-    public void addArtworksToProfile() {
-    	Registration.getArtists().get(0).addPainting("Mona Lisa", 1503, 1000000, "Oil Paint");//0
-		Registration.getArtists().get(1).addSculpture("David ", 1504, 2000000, 12478, 2.3, 5.17);//1
-		Registration.getArtists().get(2).addPainting("The Starry Night", 1889, 3000000, "Oil Paint");//2
-		Registration.getArtists().get(2).addPainting("Cafe Terrace at Night", 1888, 3000000, "Oil Paint");//3
     }
     
     public void addPainting(String name, int yearCreated, double price, String description) {
@@ -68,15 +61,17 @@ public class Artist extends User{
 	}
     
     public void viewArtGalleryEvents(List<ArtGalleryEvent> events) {
-        System.out.println("Artist " + getUsername() + " is viewing art gallery events:");
+        System.out.println("\nArt gallery events:");
         for (ArtGalleryEvent event : events)
             System.out.println(event.getEventName());
     }
 
     public void enrollInEvent(int eventId) {
-        for(ArtGalleryEvent event : ArtGallerySystem.events)
-    		if(event.getId() == eventId)
+        for(ArtGalleryEvent event : ArtGallerySystem.getEvents())
+    		if(event.getId() == eventId) {
     			event.enrollArtist(this);
+    			System.out.println("\nArtist enrolled in "+event.getEventName()+" successfully");
+    		}
     }
 
     public void setApproved(boolean approved) {
